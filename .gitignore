@@ -1,0 +1,35 @@
+# Archivos y carpetas generadas automáticamente por Unity
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+
+# Archivos de configuración de VS/Mono
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+
+# Archivos de Unity específicos que no deben versionarse
+*.bak
+*.old
+*.orig
+*.swp
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Git LFS
+.gitattributes
