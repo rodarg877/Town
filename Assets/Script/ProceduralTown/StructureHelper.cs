@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace SVS
@@ -17,9 +18,11 @@ namespace SVS
        
         public float animationTime = 0.01f;
 
-        public IEnumerator PlaceStructuresAroundRoad(List<Vector3Int> roadPositions)
+        public IEnumerator PlaceStructuresAroundRoad(HashSet<Vector3Int> roadPositions)
         {
-            Dictionary<Vector3Int, Direction> freeStateSpots = FindFreeSpacesAroundRoad(roadPositions);
+            List<Vector3Int> currentRoadPos = roadPositions.ToList();
+            Dictionary<Vector3Int, Direction> freeStateSpots = FindFreeSpacesAroundRoad(currentRoadPos);
+
             List<Vector3Int> blockedPosition = new List<Vector3Int>();
 
             foreach(var freeSpot in freeStateSpots)
@@ -55,12 +58,12 @@ namespace SVS
                                 {
                                     int rd = UnityEngine.Random.Range(0, naturePrefabs.Length);
                                     var nature = SpawnPrefab(naturePrefabs[rd],freeSpot.Key,rotation);
-                                    natureDictionary.Add(freeSpot.Key, nature);
+                                    natureDictionary.TryAdd(freeSpot.Key, nature);
                                     break;
                                 }
                             }
                            var building = SpawnPrefab(buildingTypes[i].GetPrefab(), freeSpot.Key, rotation);
-                           structuresDictionary.Add(freeSpot.Key, building);
+                           structuresDictionary.TryAdd(freeSpot.Key, building);
                            break;
                     }
                     if(buildingTypes[i].IsBuildingAvailable())
@@ -73,11 +76,11 @@ namespace SVS
                             {
                                 blockedPosition.AddRange(tempPositionsBlocked);
                                 var building = SpawnPrefab(buildingTypes[i].GetPrefab(), freeSpot.Key, rotation);
-                                structuresDictionary.Add(freeSpot.Key, building);
+                                structuresDictionary.TryAdd(freeSpot.Key, building);
                                
                                 foreach(var pos in tempPositionsBlocked)
                                 {
-                                    structuresDictionary.Add(pos, building);
+                                    structuresDictionary.TryAdd(pos, building);
                                 }
                                 break;
                             }
@@ -85,7 +88,7 @@ namespace SVS
                         else
                         {
                             var building = SpawnPrefab(buildingTypes[i].GetPrefab(), freeSpot.Key, rotation);
-                            structuresDictionary.Add(freeSpot.Key, building);
+                            structuresDictionary.TryAdd(freeSpot.Key, building);
                         }
                         break;
                     }

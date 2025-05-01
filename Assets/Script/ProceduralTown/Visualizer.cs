@@ -11,12 +11,14 @@ namespace SVS
 
         [SerializeField] RoadHelper roadHelper;
         [SerializeField] StructureHelper structureHelper;
+        [SerializeField] StartEndHelper startEndHelper;
 
         private int roadLenght = 8;
         private int lenght = 8;
+
         [SerializeField][Range(0f,90f)]private float angle = 90f;
 
-        private bool waitingForTheRoad = false;
+        private HashSet<Vector3Int> printDictionary = new HashSet<Vector3Int>();
 
         public int Lenght
         {
@@ -38,7 +40,6 @@ namespace SVS
         
         private void Start() 
         {
-            roadHelper.finishedCoroutine += () => waitingForTheRoad = false;
             CreateTown();
         }
 
@@ -48,8 +49,10 @@ namespace SVS
             
             roadHelper.Reset();
             structureHelper.Reset();
-         
+            startEndHelper.ResetCharacter();
+
             var sequence = lSystem.GenerateSentence();
+            Debug.Log(sequence);
             StartCoroutine(VisualizeSequence(sequence)); 
         }
 
@@ -65,11 +68,6 @@ namespace SVS
          
             foreach(var letter in sequence)
             {
-                if(waitingForTheRoad)
-                {
-                    yield return new WaitForEndOfFrame();
-                }
-
                 EncodingLetters encoding = (EncodingLetters)letter;
 
                 switch(encoding)
@@ -100,9 +98,8 @@ namespace SVS
                     case EncodingLetters.draw:
                         tempPosition = currentPosition;
                         currentPosition += direction * lenght;
-                        StartCoroutine(roadHelper.PlaceStreetPositions(tempPosition, Vector3Int.RoundToInt(direction),lenght));
+                        AddPrintPositions(tempPosition, Vector3Int.RoundToInt(direction),lenght);
                         
-                        waitingForTheRoad = true;
                         yield return new WaitForEndOfFrame();
 
                         Lenght -= 2;
@@ -120,9 +117,30 @@ namespace SVS
            
             }
             yield return new WaitForSeconds(0.1f);
-            roadHelper.FixRoad();
+            startEndHelper.PlacePositions(printDictionary);
+            roadHelper.CreateRoad(printDictionary);
             yield return new WaitForSeconds(0.8f);
-            StartCoroutine(structureHelper.PlaceStructuresAroundRoad(roadHelper.GetRoadPositions()));
+            StartCoroutine(structureHelper.PlaceStructuresAroundRoad(printDictionary));
+        }
+
+        public void AddPrintPositions(Vector3 startPosition, Vector3Int direction, int lenght)
+        {
+            var rotation = Quaternion.identity;
+            if (direction.x == 0)
+            {
+                rotation = Quaternion.Euler(0, 90, 0);
+            }
+
+            for (int i = 0; i < lenght; i++)
+            {
+                var position = Vector3Int.RoundToInt(startPosition + direction * i);
+                if (printDictionary.Contains(position))
+                {
+                    continue;
+                }
+
+                printDictionary.Add(position);
+            }
         }
     }
 }

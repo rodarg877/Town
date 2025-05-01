@@ -16,10 +16,6 @@ namespace SVS
        
         [Range(0,1)] public float chanceToIgnoreRule = 0.3f;
 
-        private void Start()
-        {
-            Debug.Log(GenerateSentence());    
-        }
         public string GenerateSentence(string word = null)
         {
             if( word == null)
