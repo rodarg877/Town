@@ -58,15 +58,19 @@ public class CharacterManager : MonoBehaviour
 
     private void Movement() 
     {
-        _movement.x = Input.GetAxisRaw("Horizontal");
-        _movement.z = Input.GetAxisRaw("Vertical");
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
 
-        _movement = _movement.normalized;
+        // Input en espacio local (personaje)
+        Vector3 inputDirection = new Vector3(horizontal, 0, vertical).normalized;
 
-        _animator.SetFloat("SpeedX", _movement.x);
-        _animator.SetFloat("SpeedY", _movement.z);
+        // Convertir la dirección al espacio del personaje
+        _movement = transform.TransformDirection(inputDirection);
+
+        // Animaciones
+        _animator.SetFloat("SpeedX", horizontal);
+        _animator.SetFloat("SpeedY", vertical);
     }
-
     void RotateTowardMouse()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

@@ -43,6 +43,16 @@ namespace SVS
             CreateTown();
         }
 
+        private void OnEnable()
+        {
+            WinAreaBehaviour.OnPlayerWin += CreateTown; // Suscribirse al evento
+        }
+
+        private void OnDisable()
+        {
+            WinAreaBehaviour.OnPlayerWin -= CreateTown; // Desuscribirse del evento
+        }
+
         public void CreateTown()
         {
             lenght = roadLenght;

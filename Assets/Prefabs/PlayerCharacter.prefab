@@ -80,7 +80,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 553794474510727592}
   velocity: 1
-  offset: {x: 0, y: 1.3, z: -1.17}
 --- !u!1 &8524715834190762020
 GameObject:
   m_ObjectHideFlags: 0
