@@ -514,11 +514,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 701c562309c53154c99abf1cf81fb400,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5161396618294765401}
+      addedObject: {fileID: 2010573853509698325}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 701c562309c53154c99abf1cf81fb400,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2010573853509698325}
+      addedObject: {fileID: 1067946407929225878}
   m_SourcePrefab: {fileID: 100100000, guid: 701c562309c53154c99abf1cf81fb400, type: 3}
 --- !u!95 &2962737545483841531 stripped
 Animator:
@@ -575,7 +575,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &4839761165879020724
 MonoBehaviour:
@@ -593,23 +593,6 @@ MonoBehaviour:
   - {fileID: 6964304788879841197}
   - {fileID: 8963071270380812108}
   waitForChange: 1
---- !u!114 &5161396618294765401
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8409977943422103355}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ee0adad9c57d46419414e4d2990367b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animator: {fileID: 2962737545483841531}
-  _weaponHandler: {fileID: 4839761165879020724}
-  _rig: {fileID: 6592500886051029531}
-  _moveSpeed: 1
-  _rotateSpeed: 1
 --- !u!136 &2010573853509698325
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -633,3 +616,23 @@ CapsuleCollider:
   m_Height: 1.7893887
   m_Direction: 1
   m_Center: {x: -0.0076961517, y: 0.86107045, z: 0}
+--- !u!114 &1067946407929225878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8409977943422103355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b7c34a98af32704d8f74a43c4a369ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 1
+  camFollow: {fileID: 0}
+  _animator: {fileID: 2962737545483841531}
+  _weaponHandler: {fileID: 4839761165879020724}
+  mainCamera: {fileID: 0}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 8

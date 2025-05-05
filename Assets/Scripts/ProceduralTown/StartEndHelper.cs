@@ -7,15 +7,21 @@ public class StartEndHelper : MonoBehaviour
 {
     [SerializeField] GameObject _playerCharacter;
     [SerializeField] GameObject _endObject;
-
+    [SerializeField] private NewFollowCamera _mainCamera;
     private GameObject _characterObject;
     private GameObject _endGameObject;
 
-    private CharacterManager _character;
+    private NewCaracterMove _character;
 
     private Vector3 _startPos;
     private Vector3 _endPos;
-
+    private void Start()
+    {
+        if (_mainCamera == null)
+        {
+            _mainCamera = FindObjectOfType<NewFollowCamera>();
+        }
+    }
     public void PlacePositions(HashSet<Vector3Int> roadPositions)
     {
         GetStartEndPositions(roadPositions.ToList());
@@ -60,13 +66,26 @@ public class StartEndHelper : MonoBehaviour
         if (_characterObject == null)
         {
             _characterObject = Instantiate(_playerCharacter, _startPos, transform.rotation);
-            _character = _characterObject.GetComponentInChildren<CharacterManager>();
+            _character = _characterObject.GetComponentInChildren<NewCaracterMove>();
+        }
+        NewCaracterMove moveScript = _characterObject.GetComponentInChildren<NewCaracterMove>();
+        if (moveScript != null && _mainCamera != null)
+        {
+            moveScript.camFollow = _mainCamera;
+        }
+        if (_mainCamera != null)
+        {
+            _mainCamera.SetTarget(_character.transform);
         }
         else
         {
             _character.transform.position = _startPos;
             _character.transform.rotation = transform.rotation;
             _character.gameObject.SetActive(true);
+        }
+        if (_mainCamera != null)
+        {
+            _mainCamera.SetTarget(_character.transform);
         }
     }
 
