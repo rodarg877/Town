@@ -68,6 +68,12 @@ public class StartEndHelper : MonoBehaviour
             _characterObject = Instantiate(_playerCharacter, _startPos, transform.rotation);
             _character = _characterObject.GetComponentInChildren<NewCaracterMove>();
         }
+        else
+        {
+            _character.transform.position = _startPos;
+            _character.transform.rotation = transform.rotation;
+            _character.gameObject.SetActive(true);
+        }
         NewCaracterMove moveScript = _characterObject.GetComponentInChildren<NewCaracterMove>();
         if (moveScript != null && _mainCamera != null)
         {
@@ -77,12 +83,7 @@ public class StartEndHelper : MonoBehaviour
         {
             _mainCamera.SetTarget(_character.transform);
         }
-        else
-        {
-            _character.transform.position = _startPos;
-            _character.transform.rotation = transform.rotation;
-            _character.gameObject.SetActive(true);
-        }
+       
         if (_mainCamera != null)
         {
             _mainCamera.SetTarget(_character.transform);

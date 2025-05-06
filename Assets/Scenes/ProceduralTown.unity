@@ -516,10 +516,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   distance: 0.7
-  height: 0.8
-  followSpeed: 1.5
+  height: 0.7
+  followSpeed: 5
   rotationSpeed: 120
-  maxMouseAngle: 30
+  maxMouseAngle: 1
 --- !u!114 &607859926
 MonoBehaviour:
   m_ObjectHideFlags: 0

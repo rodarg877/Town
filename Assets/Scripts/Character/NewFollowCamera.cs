@@ -8,7 +8,7 @@ public class NewFollowCamera : MonoBehaviour
     public float height = 0.7f;
     public float followSpeed = 5f;
     public float rotationSpeed = 120f;
-    public float maxMouseAngle = 30f;
+    public float maxMouseAngle = 1f;
 
     private float currentYaw = 0f;
 
