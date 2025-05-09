@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NewCaracterMove : MonoBehaviour
 {
-    public float moveSpeed = 1f;
+    public float moveSpeed = 0.7f;
     public NewFollowCamera camFollow;
     [SerializeField] private Animator _animator;
     [SerializeField] private WeaponHandler _weaponHandler;

@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1666517407644040724}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PlayerCharacter
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40,11 +40,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1666517407644040724}
     m_Modifications:
-    - target: {fileID: 2962737545483841531, guid: c984c9b64a020ca41ac1d14ef78926fc,
-        type: 3}
-      propertyPath: m_ApplyRootMotion
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8409977943422103355, guid: c984c9b64a020ca41ac1d14ef78926fc,
         type: 3}
       propertyPath: m_Name
