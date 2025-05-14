@@ -15,6 +15,7 @@ public class StartEndHelper : MonoBehaviour
 
     private Vector3 _startPos;
     private Vector3 _endPos;
+    public Vector3 StartPos => _startPos;
     private void Start()
     {
         if (_mainCamera == null)

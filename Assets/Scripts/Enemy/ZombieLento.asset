@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fee1314048b3b8243b93876f19f85fcc, type: 3}
   m_Name: ZombieLento
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  moveSpeed: 2
+  maxHealth: 20
+  moveSpeed: 0.2
   attackDamage: 10
   attackRange: 1.5

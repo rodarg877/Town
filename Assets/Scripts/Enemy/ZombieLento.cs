@@ -8,11 +8,12 @@ public class ZombieLento : Zombie
     protected override void Awake()
     {
         base.Awake();
-        agent.speed *= speedMultiplier; // Ajusta la velocidad de movimiento
+        agent.speed *= speedMultiplier; 
     }
 
     protected override void UpdateBehavior()
     {
+        
         if (PlayerInSight())
         {
             float distance = Vector3.Distance(transform.position, player.position);

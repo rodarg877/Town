@@ -1,4 +1,5 @@
 using Unity.Services.Analytics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.XR;
@@ -8,7 +9,7 @@ public abstract class Zombie : Enemy
     public float wanderRadius = 5f;
     public float wanderTimer = 3f;
     public float attackRange;
-    public float attackCooldown = 2f;
+    public float attackCooldown = 1f;
 
     protected float timer;
     protected float attackTimer;
@@ -26,6 +27,11 @@ public abstract class Zombie : Enemy
     {
         attackTimer -= Time.deltaTime;
         UpdateBehavior();
+        if (animator != null)
+        {
+            float speed = agent.velocity.magnitude;
+            animator.SetFloat("Speed", speed);
+        }
     }
     // Detectar al jugador
     protected bool PlayerInSight()
@@ -34,13 +40,12 @@ public abstract class Zombie : Enemy
 
         Vector3 directionToPlayer = (player.position - eyes.position).normalized;
         float distanceToPlayer = Vector3.Distance(eyes.position, player.position);
-
-        if (distanceToPlayer > detectionRadius) return false;
-
         float angle = Vector3.Angle(eyes.forward, directionToPlayer);
-        if (angle < visionAngle / 2f)
+        if (distanceToPlayer < detectionRadius)
         {
-            // Verifica si hay línea de visión
+            return false;
+        }else if (angle < visionAngle / 2f)
+        {
             if (!Physics.Raycast(eyes.position, directionToPlayer, distanceToPlayer, obstacleMask))
             {
                 return true;
@@ -64,7 +69,7 @@ public abstract class Zombie : Enemy
                 wanderTarget = navHit.position;
                 agent.SetDestination(wanderTarget);
             }
-
+           
             timer = 0;
         }
     }
